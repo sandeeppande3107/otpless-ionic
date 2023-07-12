@@ -28,6 +28,7 @@ public class OtplessPlugin: CAPPlugin, onResponseDelegate {
     
     @objc func startWithCallback(_ call: CAPPluginCall) {
         let jsObject = call.getObject("jsonParams")
+        Otpless.sharedInstance.shouldHideButton(hide: true)
         DispatchQueue.main.async {
             let viewController = UIApplication.shared.delegate?.window??.rootViewController
             self.pluginCallWrap = CapPluginCallWrapper(pluginCall: call)

@@ -1,7 +1,6 @@
 import UIKit
 import Capacitor
 
-import OtplessIonic
 import OtplessSDK
 
 @UIApplicationMain
