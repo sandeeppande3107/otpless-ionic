@@ -29,12 +29,10 @@ const Home: React.FC = () => {
     let params = {
       'method': 'get',
       'params': {
-        'ux_mode': 'auto_clicked'
+        'isSpecialClient': 'true'
       }
     };
-    manager.start((result:any) => {
-        handleResult(result)
-    }, params);
+    manager.start(params);
   }
 
   const afterSigninCompleted = async () => {

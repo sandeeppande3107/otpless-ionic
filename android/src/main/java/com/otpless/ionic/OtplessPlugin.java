@@ -68,5 +68,6 @@ public class OtplessPlugin extends Plugin {
             isShowFab = true;
         }
         OtplessManager.getInstance().showFabButton(isShowFab);
+        call.resolve();
     }
 }
