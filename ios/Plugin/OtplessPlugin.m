@@ -8,4 +8,6 @@ CAP_PLUGIN(OtplessPlugin, "OtplessPlugin",
            CAP_PLUGIN_METHOD(startWithCallback, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(onSignInCompleted, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(showFabButton, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(showOtplessLoginPage, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(isWhatsappInstalled, CAPPluginReturnPromise);
 )

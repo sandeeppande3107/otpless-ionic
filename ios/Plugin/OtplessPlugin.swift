@@ -60,6 +60,28 @@ public class OtplessPlugin: CAPPlugin, onResponseDelegate {
         }
         notifyListeners("OtplessResultEvent", data: result)
     }
+    
+    @objc func showOtplessLoginPage(_ call: CAPPluginCall) {
+        let jsObject = call.getObject("jsonParams")
+        Otpless.sharedInstance.shouldHideButton(hide: true)
+        DispatchQueue.main.async {
+            let viewController = UIApplication.shared.delegate?.window??.rootViewController
+            self.pluginCallWrap = CapPluginCallWrapper(pluginCall: call)
+            Otpless.sharedInstance.delegate = self.pluginCallWrap!
+            if let param = jsObject {
+                Otpless.sharedInstance.showOtplessLoginPageWithParams(vc: viewController!, params: param)
+            } else {
+                Otpless.sharedInstance.showOtplessLoginPage(vc: viewController!)
+            }
+        }
+    }
+    
+    @objc func isWhatsappInstalled(_ call: CAPPluginCall) {
+        let hasWhatsapp = Otpless.sharedInstance.isWhatsappInstalled()
+        var result: JSObject = JSObject()
+        result["hasWhatsapp"] = hasWhatsapp
+        call.resolve(result)
+    }
 }
 
 class CapPluginCallWrapper: onResponseDelegate {
@@ -83,7 +105,6 @@ class CapPluginCallWrapper: onResponseDelegate {
         pluginCall.resolve(result)
         isCallUsed = true
     }
-    
 }
 
 
