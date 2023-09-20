@@ -11,7 +11,8 @@ const Home: React.FC = () => {
   const [result, setResult] = useState("Result:")
   OtplessInstance.removeAllListeners();
   OtplessInstance.addListener('OtplessResultEvent', (result: any) => {
-      handleResult(result)
+    console.log("data in listener: " + result);
+    handleResult(result);
     });
 
   const openWithCallback = async () => {
@@ -21,8 +22,18 @@ const Home: React.FC = () => {
         'ux_mode': 'auto_clicked'
       }
     };
-    let data = await manager.startWithCallback(params);
+    const data = await manager.startWithCallback(params);
     handleResult(data);
+  }
+
+  const openLoginPage = async() => {
+    const data = await manager.showOtplessLoginPage();
+    handleResult(data);
+  }
+
+  const checkWhatsappApp = async() => {
+    const hasWhatsapp = await manager.isWhatsappInstalled()
+    setResult("whatsapp: " + hasWhatsapp);
   }
 
   const openWithEvent = async () => {
@@ -73,6 +84,11 @@ const Home: React.FC = () => {
         <IonButton onClick={() => openWithCallback()}>Open With Callback</IonButton>
         <IonButton style={{ "marginTop": "16px" }} onClick={() => afterSigninCompleted()}>After SignIn Completed</IonButton>
         <IonButton style={{ "marginTop": "16px" }} onClick={() => hideSignInButton()}>Hide Signin Button</IonButton>
+
+        <IonButton style={{ "marginTop": "16px" }} onClick={() => openLoginPage()}>Show Login Page</IonButton>
+
+        <IonButton style={{ "marginTop": "16px" }} onClick={() => checkWhatsappApp()}>Check Whatsapp</IonButton>
+
         <ExploreContainer />
       </IonContent>
     </IonPage>

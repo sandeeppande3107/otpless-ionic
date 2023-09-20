@@ -11,4 +11,10 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(OtplessPlugin.class);
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (OtplessPlugin.onBackPressed(this)) return;
+        super.onBackPressed();
+    }
 }
